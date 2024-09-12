@@ -1,0 +1,11 @@
+version: '3.1'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: runner_db
+    ports:
+      - "5432:5432"
