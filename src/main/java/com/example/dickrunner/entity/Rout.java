@@ -14,8 +14,4 @@ public class Rout {
 
     @Lob
     private String coordinates;  // Храним координаты маршрута в виде JSON строки
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 }

@@ -1,7 +1,6 @@
 package com.example.dickrunner.service;
 
 import com.example.dickrunner.entity.Rout;
-import com.example.dickrunner.entity.User;
 import com.example.dickrunner.repository.RoutRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,9 +37,8 @@ public class RouteService {
     }
 
     @Transactional
-    public Rout saveRoute(User user, String routeName, List<GeoPoint> coordinates) {
+    public Rout saveRoute(String routeName, List<GeoPoint> coordinates) {
         Rout route = new Rout();
-        route.setUser(user);
         route.setName(routeName);
         route.setCoordinates(convertToJSON(coordinates)); // преобразуй координаты в JSON
         return routRepository.save(route);

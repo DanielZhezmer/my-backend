@@ -17,10 +17,6 @@ public class Result {
     private double distance;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne
     @JoinColumn(name = "rout_id")
     private Rout rout;
 

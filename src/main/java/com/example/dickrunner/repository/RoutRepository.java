@@ -7,7 +7,5 @@ import java.util.List;
 
 public interface RoutRepository extends JpaRepository<Rout, Long> {
 
-    List<Rout> findByUserId(Long userId);
-
 
 }
