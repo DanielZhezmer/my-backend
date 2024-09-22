@@ -24,7 +24,10 @@ public class RoutController {
     private final Logger logger = Logger.getLogger(RoutController.class.getName());
 
     @GetMapping("/heart")
-    public ResponseEntity<GeoRouteResponse> getHeartRoute(@RequestParam double distance) {
+    public ResponseEntity<GeoRouteResponse> getHeartRoute(
+            @RequestParam double distance,
+            @RequestParam double latitude,
+            @RequestParam double longitude) {
         logger.info("Получен запрос на генерацию маршрута в форме сердца с расстоянием: " + distance);
         if (distance <= 0) {
             logger.warning("Неверное значение расстояния: " + distance);
@@ -34,7 +37,7 @@ public class RoutController {
         // Вызов сервиса для генерации маршрута
         List<GeoPoint> route;
         try {
-            route = routeService.generateHeartShapeRoute(distance);
+            route = routeService.generateHeartShapeRoute(distance, latitude, longitude);
         } catch (Exception e) {
             logger.severe("Ошибка при генерации маршрута: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -49,5 +52,6 @@ public class RoutController {
 
         return ResponseEntity.ok(new GeoRouteResponse("success", route));
     }
+
 }
 

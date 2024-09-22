@@ -24,8 +24,9 @@ public class RouteServiceTest {
     @Test
     public void testGenerateHeartShapeRoute() {
         double distance = 5.0;
-
-        List<GeoPoint> route = routeService.generateHeartShapeRoute(distance);
+        double userLatitude = 20.;
+        double userLongitude = 50.;
+        List<GeoPoint> route = routeService.generateHeartShapeRoute(distance, userLatitude, userLongitude);
 
         assertNotNull(route, "Маршрут не должен быть null");
         assertFalse(route.isEmpty(), "Маршрут не должен быть пустым");
@@ -35,8 +36,9 @@ public class RouteServiceTest {
     @Test
     public void testGenerateHeartShapeRouteInvalidDistance() {
         double distance = 0.0;
-
-        List<GeoPoint> route = routeService.generateHeartShapeRoute(distance);
+        double userLatitude = 20.;
+        double userLongitude = 50.;
+        List<GeoPoint> route = routeService.generateHeartShapeRoute(distance, userLatitude, userLongitude);
 
         assertTrue(route.isEmpty());
     }

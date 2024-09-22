@@ -34,7 +34,7 @@ public class RoutControllerTest {
     public void testGetHeartRouteSuccess() throws Exception {
         // Мокируем возвращаемый маршрут
         List<GeoPoint> mockRoute = List.of(new GeoPoint(50.0, 20.0), new GeoPoint(51.0, 21.0));
-        Mockito.when(routeService.generateHeartShapeRoute(5.0)).thenReturn(mockRoute);
+        Mockito.when(routeService.generateHeartShapeRoute(5.0, 50.0, 20.0)).thenReturn(mockRoute);
 
         mockMvc.perform(get("/routes/heart")
                         .param("distance", "5.0"))
@@ -54,7 +54,7 @@ public class RoutControllerTest {
     @Test
     public void testGetHeartRouteEmptyRoute() throws Exception {
 
-        Mockito.when(routeService.generateHeartShapeRoute(5.0)).thenReturn(Collections.emptyList());
+        Mockito.when(routeService.generateHeartShapeRoute(5.0, 50.0, 20.0)).thenReturn(Collections.emptyList());
         mockMvc.perform(get("/routes/heart")
                         .param("distance", "5.0"))
                 .andExpect(status().isInternalServerError())
