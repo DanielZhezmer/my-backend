@@ -37,7 +37,7 @@ public class RouteService {
 
             route.add(new GeoPoint(pointLatitude, pointLongitude));
         }
-
+        route.add(new GeoPoint(userLatitude, userLongitude));
         return route;
     }
 
