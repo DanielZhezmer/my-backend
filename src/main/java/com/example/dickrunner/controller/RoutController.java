@@ -37,7 +37,7 @@ public class RoutController {
         // Вызов сервиса для генерации маршрута
         List<GeoPoint> route;
         try {
-            route = routeService.generateHeartShapeRoute(distance, latitude, longitude);
+            route = routeService.generateCustomShapeRoute(distance, latitude, longitude);
         } catch (Exception e) {
             logger.severe("Ошибка при генерации маршрута: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

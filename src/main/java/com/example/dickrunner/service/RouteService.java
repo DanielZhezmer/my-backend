@@ -18,7 +18,7 @@ import java.util.List;
 public class RouteService {
 
     private final RoutRepository routRepository;
-    public List<GeoPoint> generateHeartShapeRoute(double distance, double userLatitude, double userLongitude) {
+    public List<GeoPoint> generateCustomShapeRoute(double distance, double userLatitude, double userLongitude) {
         List<GeoPoint> route = new ArrayList<>();
         if (distance <= 0) {
             return Collections.emptyList();  // Возвращаем пустой маршрут
@@ -27,7 +27,7 @@ public class RouteService {
         double scale = distance / 1000.0; // Масштабируем форму в зависимости от расстояния
 
         // Пример координат в виде сердца, смещенных относительно текущих координат пользователя
-        for (double t = 0; t < Math.PI * 2; t += 0.1) {
+        for (double t = 0; t < Math.PI * 2; t += 0.5) {
             double x = scale * 16 * Math.pow(Math.sin(t), 3);
             double y = scale * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
 

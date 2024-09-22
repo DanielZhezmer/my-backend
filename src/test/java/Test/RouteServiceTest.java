@@ -4,7 +4,6 @@ import com.example.dickrunner.model.GeoPoint;
 import com.example.dickrunner.service.RouteService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class RouteServiceTest {
         double distance = 5.0;
         double userLatitude = 20.;
         double userLongitude = 50.;
-        List<GeoPoint> route = routeService.generateHeartShapeRoute(distance, userLatitude, userLongitude);
+        List<GeoPoint> route = routeService.generateCustomShapeRoute(distance, userLatitude, userLongitude);
 
         assertNotNull(route, "Маршрут не должен быть null");
         assertFalse(route.isEmpty(), "Маршрут не должен быть пустым");
@@ -38,7 +37,7 @@ public class RouteServiceTest {
         double distance = 0.0;
         double userLatitude = 20.;
         double userLongitude = 50.;
-        List<GeoPoint> route = routeService.generateHeartShapeRoute(distance, userLatitude, userLongitude);
+        List<GeoPoint> route = routeService.generateCustomShapeRoute(distance, userLatitude, userLongitude);
 
         assertTrue(route.isEmpty());
     }
