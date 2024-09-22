@@ -24,27 +24,31 @@ public class RouteService {
             return Collections.emptyList();  // Возвращаем пустой маршрут
         }
 
-        double scale = distance / 1000.0; // Масштабируем форму в зависимости от расстояния
+        double scale = distance * 100; // Масштабируем форму в зависимости от расстояния
+
+        // Используем дельты для вычисления изменений в координатах (расстояние в метрах для 1 градуса)
+        double metersPerDegreeLatitude = 111_320;  // Примерно 111.32 км для 1 градуса широты
+        double metersPerDegreeLongitude = 111_320 * Math.cos(Math.toRadians(userLatitude));  // Учет широты
 
         // Создаем координаты для нижних кругов
         for (double t = Math.PI; t <= 2 * Math.PI; t += 0.1) {
             double x = scale * Math.cos(t);
             double y = scale * Math.sin(t);
-            route.add(new GeoPoint(userLatitude + (y / 111.32), userLongitude + (x / (111.32 * Math.cos(Math.toRadians(userLatitude))))));
+            route.add(new GeoPoint(userLatitude + (y / metersPerDegreeLatitude), userLongitude + (x / metersPerDegreeLongitude)));
         }
 
-        // Создаем координаты для средней части
+        // Создаем координаты для средней части (прямая линия)
         for (double t = 0; t <= 1; t += 0.1) {
-            double x = 0; // Прямая линия по x
-            double y = -scale * 2 * t; // Прямая линия по y
-            route.add(new GeoPoint(userLatitude + (y / 111.32), userLongitude + (x / (111.32 * Math.cos(Math.toRadians(userLatitude))))));
+            double x = 0;  // Прямая линия по x
+            double y = -scale * 2 * t;  // Прямая линия по y
+            route.add(new GeoPoint(userLatitude + (y / metersPerDegreeLatitude), userLongitude + (x / metersPerDegreeLongitude)));
         }
 
         // Создаем координаты для верхней округлой части
         for (double t = 0; t <= Math.PI; t += 0.1) {
             double x = scale * Math.cos(t);
             double y = -scale * 2 + scale * Math.sin(t);
-            route.add(new GeoPoint(userLatitude + (y / 111.32), userLongitude + (x / (111.32 * Math.cos(Math.toRadians(userLatitude))))));
+            route.add(new GeoPoint(userLatitude + (y / metersPerDegreeLatitude), userLongitude + (x / metersPerDegreeLongitude)));
         }
 
         return route;
